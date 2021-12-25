@@ -45,23 +45,23 @@ const CancelTicket = () => {
             setAlert('')
 
             const info = await fetchTicketInfo(ticketId, bkash)
+            console.log(info)
+            // if (info.length > 0) {
+            //     //logged in
+            //     // console.log(info)
+            //     setError('')
+            //     setTicketInfo(info)
+            //     // if(info){
 
-            if (info.length > 0) {
-                //logged in
-                // console.log(info)
-                setError('')
-                setTicketInfo(info)
-                // if(info){
-
-                //     history.push('/search-result')
-                // }
-                // else{
-                //     history.push('/')
-                // }
-            }
-            else {
-                setError('Invalid information!')
-            }
+            //     //     history.push('/search-result')
+            //     // }
+            //     // else{
+            //     //     history.push('/')
+            //     // }
+            // }
+            // else {
+            //     setError('Invalid information!')
+            // }
 
         }
         else {
@@ -110,7 +110,7 @@ if(cancel){
                 </div>
                 <div className="col-md-4 mx-auto py-4">
                     {
-                        ticketInfo.map(t => {
+                       ticketInfo && ticketInfo.map(t => {
                             return (
                                 <>
                                     <h3>Your Information</h3>
@@ -124,7 +124,7 @@ if(cancel){
                                     <button onClick={()=>setCancel(true)} className="btn my-3">cancel now</button>
                                 </>
                             )
-                        })
+                        }) 
                     }
                 </div>
             </div>

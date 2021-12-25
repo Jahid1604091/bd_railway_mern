@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import axios from 'axios'
 import { base_url, calculatePrice, UserContext } from '../App'
 import { Link } from 'react-router-dom'
-const qs = require('querystring')
+
 
 const SearchResult = () => {
     const history = useHistory()
@@ -15,6 +15,9 @@ const SearchResult = () => {
     const [availableTrains, setAvailableTrains] = useState([])
 
 
+
+    // let arrayOfTrainNo = availableTrains.map(a => a.train_no);
+
     const fetchByStation = async () => {
         const res = await axios.get(`/search-by-station`, {
             params: {
@@ -24,25 +27,31 @@ const SearchResult = () => {
         })
         const trainList = await res.data
         setAvailableTrains(trainList)
-
     }
 
-    // let arrayOfTrainNo = availableTrains.map(a => a.train_no);
-
-
-
     useEffect(() => {
-        fetchByStation()
 
+    fetchByStation()
+  
     }, [])
 
 
-    // console.log(info,availableTrains)
 
-if(!isLoggedIn){
-    history.push('/login')
-}
-   
+    if (!isLoggedIn) {
+       return <>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8 mx-auto text-center">
+                        <h3>Please<Link to='/login'> login </Link>first</h3>
+                        <i>or,</i>
+                        <h3><Link to='/register'> Signup </Link> first</h3>
+                    </div>
+                </div>
+            </div>
+       </>
+    }
+    else {
+
         return (
             <Wrapper>
 
@@ -52,7 +61,7 @@ if(!isLoggedIn){
                         <h3 className='py-2'>Search Result</h3>
                         <div className='py-4'>
                             {
-                                availableTrains.map(t => {
+                                availableTrains.length > 0 ? availableTrains.map(t => {
                                     return <div key={t.train_no} className='shadow p-4 my-2 trainlist d-lg-flex justify-content-around'>
                                         <strong>Train: {t.train_no}</strong>
                                         <div>
@@ -81,7 +90,7 @@ if(!isLoggedIn){
                                             }} className="btn" >purchase</Link>
                                         </div>
                                     </div>
-                                })
+                                }) : 'No Train found'
                             }
                         </div>
                     </div>
@@ -89,7 +98,9 @@ if(!isLoggedIn){
                 </div>
             </Wrapper>
         )
-    
+    }
+
+
 }
 
 const Wrapper = styled.section`
