@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { UserContext } from '../App'
 
@@ -23,6 +23,8 @@ const Login = () => {
         })
     }
 
+
+    
     const fetchUser = async (email, password) => {
         const res = await axios.get(`/users`, {
             params: {

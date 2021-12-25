@@ -34,7 +34,7 @@ client.connect(err => {
 
 
     //  - - for ADMIN - -
-    // //insert a product
+    // //insert a ticket
     app.post('/admin/trains/add', (req, res) => {
         trainListCollection.insertOne(req.body)
             .then(result => {
@@ -54,7 +54,7 @@ client.connect(err => {
     })
 
 
-   //cancell
+   //cancel
     app.get('/purchase', (req, res) => {
        
         purchaseCollection.find({
@@ -62,9 +62,17 @@ client.connect(err => {
 			bkash:req.query.bkash
             
         })
-            .toArray((err, docs) => {
+        .toArray((err, docs) => {
+            if(err){
+                res.send(err)
+            }
+            else{
+
                 res.send(docs)
+            }
             })
+
+            console.log(err)
 
     })
 
