@@ -30,7 +30,7 @@ const Register = () => {
 
     const sendUsers = async ()=>{
         
-        const res = await axios.post(`${base_url}/users`,users)
+        const res = await axios.post(`/users`,users)
         const data = await res.data
         // console.log(data)
         // setAlert(data)

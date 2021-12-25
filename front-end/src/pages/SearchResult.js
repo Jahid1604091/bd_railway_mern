@@ -16,7 +16,7 @@ const SearchResult = () => {
 
 
     const fetchByStation = async () => {
-        const res = await axios.get(`${base_url}/search-by-station`, {
+        const res = await axios.get(`/search-by-station`, {
             params: {
                 "from": info.from,
                 "to": info.to

@@ -26,7 +26,7 @@ const CancelTicket = () => {
     }
 
     const fetchTicketInfo = async (ticketId, bkash) => {
-        const res = await axios.get(`${base_url}/purchase`, {
+        const res = await axios.get(`/purchase`, {
             params: {
                 "ticketId": ticketId,
                 "bkash": bkash
@@ -115,12 +115,12 @@ if(cancel){
                                 <>
                                     <h3>Your Information</h3>
                                     <p>Id : <strong>{t._id}</strong></p>
-                                    <p>Amount : <strong>{t.amount}</strong> BDT</p>
+                                    <p>Amount : <strong>{t.amount.toFixed(2)}</strong> BDT</p>
                                     <p>bKash No: <strong>{t.bkash}</strong></p>
                                     <p>Purchased On : <strong>{t.date}</strong></p>
-                                    <p>Deduced amount : <strong>{t.amount * 0.1}</strong> BDT</p>
+                                    <p>Deduced amount : <strong>{(t.amount * 0.1).toFixed(2)}</strong> BDT</p>
                                     <hr />
-                                    <strong>You will receive {t.amount - t.amount * 0.1}</strong> BDT
+                                    <strong>You will receive {(t.amount - t.amount * 0.1).toFixed(2)}</strong> BDT
                                     <button onClick={()=>setCancel(true)} className="btn my-3">cancel now</button>
                                 </>
                             )
